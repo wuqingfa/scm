@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  mongo:
+     build: ./mongo
+     expose:
+       - 27017
+     ports:
+       - "27017:27017"
+     volumes:
+       - ./vol/mongo/data:/data/db
+  cas-server:
+     build: ./node-cas
+     depends_on:
+        - mongo
+     expose:
+       - 80
+     ports:
+       - "5010:80"
+  #     - "80:80"
+     links:
+       - mongo
+  otp-server:
+     build: ./node-cas
+     expose:
+       - 3000
+     ports:
+       - "5012:3000"
+  #     - "80:80"
+     links:
+       - mongo
+
+  dns-server:
+     build: ./node-dns
+  #   expose:
+  #     - 53
+     ports:
+       - "53:53/udp"
+       - "53:53/tcp"

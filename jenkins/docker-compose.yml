@@ -1,0 +1,11 @@
+jenkins:
+    build: ./jenkins
+    volumes:
+        - ./vol/jenkins/:/var/jenkins_home
+    net: host
+    expose:
+       - 50000
+       - 8080
+    ports:
+       - "50000:50000"
+       - "8080:8080"

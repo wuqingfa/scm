@@ -1,0 +1,12 @@
+openvpn:
+   build: ./openvpn
+   privileged: true
+   expose:
+     - 1194/udp
+   ports:
+     - "5001:1194/udp"
+#   net: "host"
+   volumes:
+     - ./vol/openvpn:/etc/openvpn
+#   environment:
+#     - cap-add="NET
